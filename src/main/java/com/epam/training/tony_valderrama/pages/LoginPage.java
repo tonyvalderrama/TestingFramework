@@ -3,6 +3,7 @@ package com.epam.training.tony_valderrama.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
@@ -15,20 +16,26 @@ import java.util.List;
  * Esta clase permite probar el login de la página
  * saucedemo.com
  */
-public class LoginPage {
+public class LoginPage extends BasePage {
     // Página que voy a abrir
     private static final String PAGE_URL = "https://www.saucedemo.com/";
     // Para escribir al log
     private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
-    private final WebDriver driver;
 
     /**
      * Constructor que inicializa el WebDriver y abre la página
      */
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
+        PageFactory.initElements(this.driver, this);
+        openPage();
+    }
+
+    @Override
+    protected BasePage openPage() {
         driver.navigate().to(PAGE_URL);
         logger.info("Driver inicializado y página abierta");
+        return this;
     }
 
     /**
@@ -38,8 +45,7 @@ public class LoginPage {
      */
     public void enterUser(String userName) {
         // Uso metodo de la clase que espera a que el locator se cargue
-        //WebElement userNameInput = waitForElement(By.xpath("//*[@id=\"user-name\"]"));
-        WebElement userNameInput = driver.findElement(By.xpath("//*[@id=\"user-name\"]"));
+        WebElement userNameInput = waitForElement(By.xpath("//*[@id=\"user-name\"]"));
         // Mando texto al input box
         userNameInput.sendKeys(userName);
         // Mensaje al log
@@ -96,7 +102,7 @@ public class LoginPage {
      */
     public String getURL() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.urlContains("saucedemo"));
+        wait.until(ExpectedConditions.urlContains("inventory.html"));
         return driver.getCurrentUrl();
     }
 

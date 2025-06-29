@@ -25,12 +25,14 @@ To perform the task use the various of additional options:
 - Test Automation tool: Selenium WebDriver;
 - Project Builder: Maven;
 - Browsers: 1) Firefox; 2) Edge;
-  - *Note*: I also included support for Chrome if it can't finde Firefox or Edge
+  - *Note*: I also included support for Chrome if it can't find Firefox or Edge
 - Locators: XPath;
 - Test Runner: JUnit;
-  - *Note*: Since it needs parallel execution and JUnit only does unit tests, I'm using TestNG that allows parallel execution
+  - *Note*: Since it needs parallel execution and JUnit only does unit tests, I'm using TestNG that allows parallel execution, but the unit tests are written using JUnit.
+  - JUnit tests in `src/test/java/test` and Cucumber/TestNG/Parallel tests in `src/test/java/runners`, `src/test/java/stepdefinitions`, `src/test/resources` and `src/test/resources/features`
 - [Optional] Patterns: 1) Singleton; 2) Adapter; 3) Strategy;
-  - *Note*: The *Singleton* pattern is implemented in the DriverManager class
+  - *Note*: The *Singleton* pattern is implemented in the DriverManager class to manage only one WebDriver for all the JUnit tests
+  - *Note*: The *Adapter* pattern, although not programmed by me, is seen while using SLF4J as an adapter to Log4j (we could change Log4j for logback, JLo, LN2, etc)
 - [Optional] Test automation approach: BDD;
   - *Note*: To do this, I'm using Cucumber for the tests
 - Assertions: Hamcrest;

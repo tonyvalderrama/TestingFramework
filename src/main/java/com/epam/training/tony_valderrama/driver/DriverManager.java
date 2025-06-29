@@ -1,4 +1,4 @@
-package com.epam.training.tony_valderrama.services;
+package com.epam.training.tony_valderrama.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
@@ -9,10 +9,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 public class DriverManager {
     private static WebDriver driver;
 
-    // Constructor privado
-    // Patrón Singleton - ayuda a tener solo un driver para todos los objetos que lo requieren
+    // Constructor privado. Para el patrón Singleton - ayuda a tener solo un driver
+    // para todos los objetos que lo requieren
     private DriverManager() {}
 
+    /**
+     * Metodo que devuelve la instancia a un WebDriver. Solo permite un solo driver activo
+     * para todas las pruebas
+     *
+     * @return la cadena con el texto del mensaje de error, cadena vacía si no hay error
+     */
     public static WebDriver getDriver() {
         if (driver == null) {
             String browser = System.getProperty("browser", "chrome");
@@ -29,11 +35,14 @@ public class DriverManager {
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
             }
+            driver.manage().window().maximize();
         }
         return driver;
     }
 
-    // Si el driver existe, cierro ventana y lo hago igual a null
+    /**
+     * Metodo que revisa si el driver existe, cierro ventana y lo hago igual a null
+     */
     public static void quitDriver() {
         if (driver != null) {
             driver.quit();

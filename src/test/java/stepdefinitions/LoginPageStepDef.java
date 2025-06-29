@@ -21,10 +21,12 @@ public class LoginPageStepDef {
 
     /* **
     Metodo que se ejecuta antes de las pruebas e inicializa el WebDriver
+
+    Tengo que crear uno nuevo para cada prueba porque corren en paralelo
      */
     @Before
     public void setup() {
-        String browser = System.getProperty("browser", "chrome");
+        String browser = System.getProperty("browser", "firefox");
         switch (browser.toLowerCase()) {
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
