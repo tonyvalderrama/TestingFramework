@@ -5,7 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.epam.training.tony_valderrama.services.DriverManager;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import java.time.Duration;
 import java.util.List;
@@ -17,28 +18,17 @@ import java.util.List;
 public class LoginPage {
     // Página que voy a abrir
     private static final String PAGE_URL = "https://www.saucedemo.com/";
+    // Para escribir al log
+    private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
     private WebDriver driver;
 
     /**
-     * Constructor que inicializa el WebDriver
+     * Constructor que inicializa el WebDriver y abre la página
      */
-    public LoginPage() {
-        this.driver = DriverManager.getDriver();
-    }
-
-    /**
-     * Metodo que prueba el login de la página saucedemo
-     *
-     * @param userName el nombre del usuario
-     * @param password constraseña del usuario
-     */
-    public void login(String userName,String password) {
-        // Creo el Webdriver y abro la página en el navegador
-        driver = DriverManager.getDriver();
-        driver.get(PAGE_URL);
-        // Mando nombre y password de usuario.
-        enterUser(userName);
-        enterPassword(password);
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        driver.navigate().to(PAGE_URL);
+        logger.info("Driver inicializado y página abierta");
     }
 
     /**
@@ -47,10 +37,13 @@ public class LoginPage {
      * @param userName el nombre del usuario
      */
     public void enterUser(String userName) {
-        // Uso método de la clase que espera a que el locator se cargue
-        WebElement userNameInput = waitForElement(By.xpath("//*[@id=\"user-name\"]"));
+        // Uso metodo de la clase que espera a que el locator se cargue
+        //WebElement userNameInput = waitForElement(By.xpath("//*[@id=\"user-name\"]"));
+        WebElement userNameInput = driver.findElement(By.xpath("//*[@id=\"user-name\"]"));
         // Mando texto al input box
         userNameInput.sendKeys(userName);
+        // Mensaje al log
+        logger.info("Escribiendo {} en el usuario",userName);
     }
 
     /**
@@ -61,6 +54,7 @@ public class LoginPage {
     public void enterPassword(String password) {
         WebElement passwordInput = waitForElement(By.xpath("//*[@id=\"password\"]"));
         passwordInput.sendKeys(password);
+        logger.info("Escribiendo {} en el password",password);
     }
 
     /**
@@ -70,6 +64,7 @@ public class LoginPage {
         WebElement loginButton = waitForElement(By.xpath("//*[@id=\"login-button\"]"));
         // Hago click en el botón
         loginButton.click();
+        logger.info("Se hizo click en el botón");
     }
 
     /**
@@ -85,11 +80,13 @@ public class LoginPage {
                         By.xpath("//h3[@data-test='error']")));
         // Si no hay error, devuelvo cadena vacía
         if (elements.isEmpty()) {
+            logger.info("No hay mensaje de error");
             return "";
         }
         // Si existe, devuelvo el texto sin el "Epic sadface: " que pone al principio
-        String textoError = elements.getFirst().getText();
-        return textoError.substring("Epic sadface: ".length());
+        String textoError = elements.getFirst().getText().substring("Epic sadface: ".length());;
+        logger.info("El mensaje de error es {}",textoError);
+        return textoError;
     }
 
     /**
