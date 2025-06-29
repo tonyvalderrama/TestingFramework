@@ -32,10 +32,9 @@ public class LoginPage extends BasePage {
     }
 
     @Override
-    protected BasePage openPage() {
+    protected void openPage() {
         driver.navigate().to(PAGE_URL);
         logger.info("Driver inicializado y página abierta");
-        return this;
     }
 
     /**

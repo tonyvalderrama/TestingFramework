@@ -5,8 +5,8 @@ package com.epam.training.tony_valderrama.model;
  * Mejora la legibilidad del código y facilita generar diversos usuarios para hacer pruebas
  */
 public class User {
-    private String username;
-    private String password;
+    private final String username;
+    private final String password;
 
     public User(String password, String username) {
         this.password = password;
