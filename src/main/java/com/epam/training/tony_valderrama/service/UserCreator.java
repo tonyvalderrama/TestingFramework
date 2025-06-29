@@ -7,8 +7,6 @@ public class UserCreator {
     public static final String USER_PASSWORD = "user.password";
 
     public static User withCredentialsFromProperty(){
-        System.out.println("UserCreator User = " + TestUserData.getTestData(USER_NAME));
-        System.out.println("UserCreator Pwd = " + TestUserData.getTestData(USER_PASSWORD));
         return new User(TestUserData.getTestData(USER_PASSWORD),
                 TestUserData.getTestData(USER_NAME));
     }
@@ -18,6 +16,6 @@ public class UserCreator {
     }
 
     public static User withEmptyPassword(){
-        return new User(TestUserData.getTestData(USER_PASSWORD), "");
+        return new User("", TestUserData.getTestData(USER_PASSWORD));
     }
 }

@@ -19,13 +19,36 @@ public class LoginTest extends CommonTestStuff {
         String expectedURL = "https://www.saucedemo.com/inventory.html";
         // Creo página de Login y hago login
         LoginPage loginPage = new LoginPage(driver);
-        System.out.println("User = " + user.getUsername());
-        System.out.println("Pwd = " + user.getPassword());
         loginPage.enterUser(user.getUsername());
         loginPage.enterPassword(user.getPassword());
         loginPage.clickLoginButton();
 
         // Veo si el URL es el correcto
         assertThat(loginPage.getURL(), equalTo(expectedURL));
+    }
+
+    @Test
+    public void noUserName() {
+        // Datos del usuario sin nombre
+        User user = UserCreator.withEmptyUsername();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterUser(user.getUsername());
+        loginPage.enterPassword(user.getPassword());
+        loginPage.clickLoginButton();
+
+        // Reviso que el mensaje de error sea correcto
+        String expectedMessage = "Username is required";
+        assertThat(loginPage.getErrorMessage(),equalTo(expectedMessage));
+    }
+
+    @Test
+    public void noPassword() {
+        User user = UserCreator.withEmptyPassword();
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.enterUser(user.getUsername());
+        loginPage.enterPassword(user.getPassword());
+        loginPage.clickLoginButton();
+        String expectedMessage = "Password is required";
+        assertThat(loginPage.getErrorMessage(),equalTo(expectedMessage));
     }
 }
