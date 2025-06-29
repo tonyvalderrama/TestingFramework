@@ -20,7 +20,7 @@ public class LoginPage {
     private static final String PAGE_URL = "https://www.saucedemo.com/";
     // Para escribir al log
     private static final Logger logger = LoggerFactory.getLogger(LoginPage.class);
-    private WebDriver driver;
+    private final WebDriver driver;
 
     /**
      * Constructor que inicializa el WebDriver y abre la página
@@ -84,7 +84,7 @@ public class LoginPage {
             return "";
         }
         // Si existe, devuelvo el texto sin el "Epic sadface: " que pone al principio
-        String textoError = elements.getFirst().getText().substring("Epic sadface: ".length());;
+        String textoError = elements.getFirst().getText().substring("Epic sadface: ".length());
         logger.info("El mensaje de error es {}",textoError);
         return textoError;
     }

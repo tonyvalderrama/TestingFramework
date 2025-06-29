@@ -36,3 +36,4 @@ To perform the task use the various of additional options:
 - Assertions: Hamcrest;
   - *Note*: Can be seen in the LoginPageStepDef class
 - [Optional] Loggers: SLF4J.
+  - *Note*: SLF4J is linked to Log4j
