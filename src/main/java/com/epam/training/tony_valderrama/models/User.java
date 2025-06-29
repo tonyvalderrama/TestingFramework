@@ -1,4 +1,4 @@
-package org.tony.models;
+package com.epam.training.tony_valderrama.models;
 
 import java.util.Objects;
 

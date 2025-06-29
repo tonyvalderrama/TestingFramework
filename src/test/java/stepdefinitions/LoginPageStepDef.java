@@ -1,36 +1,15 @@
 package stepdefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.tony.pages.LoginPage;
-import org.tony.services.DriverManager;
+import com.epam.training.tony_valderrama.pages.LoginPage;
 
-import java.time.Duration;
-
-import static org.testng.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 public class LoginPageStepDef {
-    private WebDriver driver;
     private LoginPage loginPage;
-
-    /**
-     * Métodos que se ejecutan antes y después de hacer todas las pruebas (Cucumber hook)
-     **/
-    @Before
-    public void setup() {
-        driver = DriverManager.getDriver();
-    }
-
-    @After
-    public void tearDown() {
-        DriverManager.quitDriver();
-    }
 
     /**
      * Métodos para los scenario definidos en Cucumber (hooks)
@@ -42,21 +21,17 @@ public class LoginPageStepDef {
 
     @Given("I have entered a empty username and password")
     public void i_have_entered_a_empty_username_and_password() {
-        loginPage.enterPassword("");
-        loginPage.enterUser("");
-        loginPage.clickLoginButton();
+        loginPage.login("","");
     }
 
     @Given("I have entered a valid username and an empty password")
     public void i_have_entered_a_valid_username_and_an_empty_password() {
-        loginPage.enterPassword("");
-        loginPage.enterUser("standard_user");
+        loginPage.login("standard_user","");
     }
 
     @Given("I have entered a valid username and password")
     public void i_have_entered_a_valid_username_and_password() {
-        loginPage.enterPassword("secret_sauce");
-        loginPage.enterUser("standard_user");
+        loginPage.login("standard_user","secret_sauce");
     }
 
     @When("I click the login button")
@@ -67,21 +42,20 @@ public class LoginPageStepDef {
     @Then("I should get an error message Username is required")
     public void i_should_get_an_error_message_username_is_required() {
         String errorText = loginPage.getErrorMessage();
-        assertEquals(errorText, "Username is required");
+        assertThat(errorText, equalTo("Username is required"));
     }
 
     @Then("I should get an error message Password is required")
     public void i_should_get_an_error_message_password_is_required() {
         String errorText = loginPage.getErrorMessage();
-        assertEquals(errorText, "Password is required");
+        assertThat(errorText, equalTo("Password is required"));
     }
 
     @Then("I should be logged correctly")
     public void loggedIn() {
         String expectedUrl = "https://www.saucedemo.com/inventory.html";
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.urlToBe(expectedUrl));
 
-        assertEquals(expectedUrl, driver.getCurrentUrl());
+        // Veo que la página haya cambiado a la que ocurre después de hacer login
+        assertThat(expectedUrl, equalTo(loginPage.getURL()));
     }
 }

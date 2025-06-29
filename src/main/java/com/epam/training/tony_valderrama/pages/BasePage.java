@@ -1,10 +1,10 @@
-package org.tony.pages;
+package com.epam.training.tony_valderrama.pages;
 
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
-import org.tony.services.DriverManager;
+import com.epam.training.tony_valderrama.services.DriverManager;
 
 import java.time.Duration;
 

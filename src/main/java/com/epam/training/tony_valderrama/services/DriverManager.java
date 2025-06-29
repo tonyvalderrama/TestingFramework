@@ -1,4 +1,4 @@
-package org.tony.services;
+package com.epam.training.tony_valderrama.services;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;

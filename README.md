@@ -34,4 +34,5 @@ To perform the task use the various of additional options:
 - [Optional] Test automation approach: BDD;
   - *Note*: To do this, I'm using Cucumber for the tests
 - Assertions: Hamcrest;
+  - *Note*: Can be seen in the LoginPageStepDef class
 - [Optional] Loggers: SLF4J.
