@@ -21,7 +21,7 @@ public class DriverManager {
      */
     public static WebDriver getDriver() {
         if (driver == null) {
-            String browser = System.getProperty("browser", "chrome");
+            String browser = System.getProperty("browser", "firefox");
             switch (browser.toLowerCase()) {
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();

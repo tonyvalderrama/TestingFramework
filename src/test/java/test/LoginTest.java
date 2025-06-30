@@ -10,13 +10,12 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class LoginTest extends CommonTestStuff {
 
+    final String LOGIN_URL = "https://www.saucedemo.com/inventory.html";
+
     @Test
     public void validLogin() {
         // Leo datos de usuario de las propiedades
         User user = UserCreator.withCredentialsFromProperty();
-        // Para depurar sin prompt de Maven
-        //User user = new User("secret_sauce","standard_user");
-        String expectedURL = "https://www.saucedemo.com/inventory.html";
         // Creo página de Login y hago login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.enterUser(user.getUsername());
@@ -24,7 +23,7 @@ public class LoginTest extends CommonTestStuff {
         loginPage.clickLoginButton();
 
         // Veo si el URL es el correcto
-        assertThat(loginPage.getURL(), equalTo(expectedURL));
+        assertThat(loginPage.getURL(), equalTo(LOGIN_URL));
     }
 
     @Test

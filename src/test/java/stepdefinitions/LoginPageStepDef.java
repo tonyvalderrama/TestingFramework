@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -95,5 +96,16 @@ public class LoginPageStepDef {
         String expectedUrl = "https://www.saucedemo.com/inventory.html";
         // Veo que la página haya cambiado a la que ocurre después de hacer login
         assertThat(expectedUrl, equalTo(loginPage.getURL()));
+    }
+
+    @And("I have entered {string} and {string}")
+    public void iHaveEnteredAnd(String userName, String password) {
+        loginPage.enterUser(userName);
+        loginPage.enterPassword(password);
+    }
+
+    @Then("I get the correct {string}")
+    public void iGetTheCorrect(String message) {
+        assertThat(message,equalTo(loginPage.getErrorMessage()));
     }
 }

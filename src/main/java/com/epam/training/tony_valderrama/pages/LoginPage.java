@@ -1,6 +1,7 @@
 package com.epam.training.tony_valderrama.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -67,7 +68,6 @@ public class LoginPage extends BasePage {
      */
     public void clickLoginButton() {
         WebElement loginButton = waitForElement(By.xpath("//*[@id=\"login-button\"]"));
-        // Hago click en el botón
         loginButton.click();
         logger.info("Se hizo click en el botón");
     }
@@ -80,9 +80,16 @@ public class LoginPage extends BasePage {
     public String getErrorMessage() {
         // Busco la lista de elementos. Aunque solo es 1, puedo ver si está vacío
         // Y me espero 1 segundo para ver si aparece (debería ser menos, pero en fin)
-        List<WebElement> elements = new WebDriverWait(driver, Duration.ofSeconds(1))
+        List<WebElement> elements;
+        try {
+            elements = new WebDriverWait(driver, Duration.ofSeconds(1))
                 .until(ExpectedConditions.presenceOfAllElementsLocatedBy(
                         By.xpath("//h3[@data-test='error']")));
+        } catch (TimeoutException e) {
+            // Si no lo halla, pudo entrar sin problemas
+            logger.info("No se encontró el elemento del mensaje de error");
+            return "Correct login";
+        }
         // Si no hay error, devuelvo cadena vacía
         if (elements.isEmpty()) {
             logger.info("No hay mensaje de error");
@@ -114,7 +121,7 @@ public class LoginPage extends BasePage {
     private WebElement waitForElement(By locator) {
         // Espero para crear referencias a la caja de texto del input box de nombre del usuario
         // (preferiría usar el By.id pero el proyecto especifica que use xPath
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         // Devuelvo el WebElement cuando ya se cargó
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
