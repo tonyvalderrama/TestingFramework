@@ -20,8 +20,8 @@ Launch URL: https://www.saucedemo.com/
   - *Note*: Since login page and the inventory page (the one that loads after a successful login) both have a "Swag Labs" title, I checked the URL to verify if it was a successful login.
 - Provide parallel execution, add logging for tests and use Data Provider to parametrize tests. Make sure that all tasks are supported by these 3 conditions: UC-1; UC-2; UC-3.
   - *Note*:
-    - With Cucumber it's better tu use a Scenario Outline instead of the Data Provider.
-    - The Cucumber login.feature has a Scenario Outline to run multiple tests (instead of a Data Provider)
+    - With Cucumber it's better tu use a Scenario Outline instead of the Data Provider, so the Cucumber `login.feature` has a Scenario Outline to run multiple tests (instead of a Data Provider)
+    - I also made TestNG tests with a DataProvider in the `LoginDataProvider` class
     - I also created `@ParametrizedTests` with JUnit in the `LoginParameterTest` class
 
 To perform the task use the various of additional options:

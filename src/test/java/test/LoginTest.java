@@ -25,7 +25,6 @@ public class LoginTest extends CommonTestStuff {
         // Creo página de Login y hago login
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(user.getUsername(),user.getPassword());
-
         // Veo si el URL es el correcto
         assertThat(loginPage.getURL(), equalTo(LOGIN_URL));
     }
@@ -36,7 +35,6 @@ public class LoginTest extends CommonTestStuff {
         User user = UserCreator.withEmptyUsername();
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(user.getUsername(),user.getPassword());
-
         // Reviso que el mensaje de error sea correcto
         String expectedMessage = "Username is required";
         assertThat(loginPage.getErrorMessage(),equalTo(expectedMessage));
