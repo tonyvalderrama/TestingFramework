@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <!-- verbose = "2" para dar todos los detalles posibles
-    thread-count = 5 para ejecutar 5 scenarios a la vez
+    thread-count = 5 para ejecutar 6 scenarios a la vez
     parallel= classes para correr las clases en paralelo (como solo
         tengo una clase, no sirve de gran cosa... -->
 <suite name="OpenSauce Test" verbose="2" parallel="classes" thread-count="6">

@@ -1,0 +1,7 @@
+username,password,message
+standard_user,secret_sauce,Correct login
+locked_out_user,secret_sauce,"Sorry, this user has been locked out."
+problem_user,secret_sauce,Correct login
+performance_glitch_user,secret_sauce,Correct login
+error_user,secret_sauce,Correct login
+visual_user,secret_sauce,Correct login

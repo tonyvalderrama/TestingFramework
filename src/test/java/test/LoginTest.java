@@ -8,6 +8,13 @@ import org.junit.jupiter.api.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
+/**
+ * JUnit test class. Se ejecuta con Maven:
+ * mvn -Dbrowser=firefox -Denvironment=su test clean
+ *
+ * Usa el archivo su.properties y como usa propiedades
+ * no se puede ejecutar desde IntelliJ
+ */
 public class LoginTest extends CommonTestStuff {
 
     final String LOGIN_URL = "https://www.saucedemo.com/inventory.html";
@@ -18,9 +25,7 @@ public class LoginTest extends CommonTestStuff {
         User user = UserCreator.withCredentialsFromProperty();
         // Creo página de Login y hago login
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUser(user.getUsername());
-        loginPage.enterPassword(user.getPassword());
-        loginPage.clickLoginButton();
+        loginPage.login(user.getUsername(),user.getPassword());
 
         // Veo si el URL es el correcto
         assertThat(loginPage.getURL(), equalTo(LOGIN_URL));
@@ -31,9 +36,7 @@ public class LoginTest extends CommonTestStuff {
         // Datos del usuario sin nombre
         User user = UserCreator.withEmptyUsername();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUser(user.getUsername());
-        loginPage.enterPassword(user.getPassword());
-        loginPage.clickLoginButton();
+        loginPage.login(user.getUsername(),user.getPassword());
 
         // Reviso que el mensaje de error sea correcto
         String expectedMessage = "Username is required";
@@ -44,9 +47,7 @@ public class LoginTest extends CommonTestStuff {
     public void noPassword() {
         User user = UserCreator.withEmptyPassword();
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.enterUser(user.getUsername());
-        loginPage.enterPassword(user.getPassword());
-        loginPage.clickLoginButton();
+        loginPage.login(user.getUsername(),user.getPassword());
         String expectedMessage = "Password is required";
         assertThat(loginPage.getErrorMessage(),equalTo(expectedMessage));
     }

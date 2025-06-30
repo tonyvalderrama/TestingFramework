@@ -39,6 +39,18 @@ public class LoginPage extends BasePage {
     }
 
     /**
+     * Metodo que mete datos y hace click al botón
+     *
+     * @param username nombre del usuario
+     * @param password contraseña
+     */
+    public void login(String username,String password) {
+        enterUser(username);
+        enterPassword(password);
+        clickLoginButton();
+    }
+
+    /**
      * Metodo que asigna el username en el elemento input de la página
      *
      * @param userName el nombre del usuario
