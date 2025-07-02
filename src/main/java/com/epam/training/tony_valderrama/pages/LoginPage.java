@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.LoggerFactory;
@@ -28,7 +27,6 @@ public class LoginPage extends BasePage {
      */
     public LoginPage(WebDriver driver) {
         super(driver);
-        PageFactory.initElements(this.driver, this);
         openPage();
     }
 

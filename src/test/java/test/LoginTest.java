@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 /**
  * JUnit test class. Se ejecuta con Maven:
- * mvn -Dbrowser=firefox -Denvironment=su test clean
+ * mvn -Dbrowser=firefox -Denvironment=su -Dtest=test.LoginTest clean test
  * Usa el archivo su.properties y como usa propiedades
  * no se puede ejecutar desde IntelliJ
  */

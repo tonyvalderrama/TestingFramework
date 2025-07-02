@@ -1,3 +1,4 @@
+## Test framework description (with notes)
 Launch URL: https://www.saucedemo.com/
 
 **UC-1 Test Login form with empty credentials**:
@@ -43,6 +44,16 @@ To perform the task use the various of additional options:
 - [Optional] Test automation approach: BDD;
   - *Note*: To do this, I'm using Cucumber for the tests
 - Assertions: Hamcrest;
-  - *Note*: Can be seen in the `LoginPageStepDef`, `LoginParameterTest` and `LoginTest` classes
+  - *Note*: Can be seen in the `LoginPageStepDef`, `LoginParameterTest`, `LoginDataProvider` and `LoginTest` classes
 - [Optional] Loggers: SLF4J.
   - *Note*: SLF4J is linked to Log4j
+
+# Running tests
+- **JUnit test with `su.properties` file**: use the Maven command `mvn -Dbrowser=firefox -Denvironment=su -Dtest=test.LoginTest clean test
+` (this will run the `LoginTest` class)
+- **TestNG parallel tests (with Cucumber)**: Right click and execute `src/test/resources/testng.xml`
+- **TestNG tests with Data Provider**: Right click and execute `src/test/java/test/LoginDataProvider`
+- **Logs** are stored in 
+  - Parallel TestNG/Cucumber testing: `target/cucumber.html` and `target/cucumber.json`
+  - JUnit tests: `target/logs/github-automation.log`
+- 
